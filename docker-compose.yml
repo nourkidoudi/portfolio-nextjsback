@@ -1,9 +1,9 @@
 services:
   portfolio:
     image: ${DOCKERHUB_USER}/portfolio-nextjs:${TAG:-v1}
-    container_name: portfolio-nextjs
+    container_name: portfolio-nextjsback
     ports:
-      - "3000:3000"
+      - "3001:3000"
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
