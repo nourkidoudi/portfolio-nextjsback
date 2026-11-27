@@ -51,9 +51,9 @@ jobs:
           $healthy = $false
           for ($i = 0; $i -lt 20; $i++) {
             try {
-              $response = Invoke-WebRequest -Uri "http://localhost:3002" -UseBasicParsing -TimeoutSec 5
+              $response = Invoke-WebRequest -Uri "http://localhost:3011" -UseBasicParsing -TimeoutSec 5
               if ($response.StatusCode -eq 200) {
-                Write-Host "OK : http://localhost:3002"
+                Write-Host "OK : http://localhost:3011"
                 $healthy = $true
                 break
               }
@@ -63,6 +63,6 @@ jobs:
           }
           if (-not $healthy) {
             docker compose logs
-            throw "Health check failed: http://localhost:3002"
+            throw "Health check failed: http://localhost:3011"
           }
           
