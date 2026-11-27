@@ -46,10 +46,23 @@ jobs:
           docker compose pull
           docker compose up -d
       - name: Health check
+        shell: powershell
         run: |
-          for i in $(seq 1 20); do
-            curl -fs http://localhost:3000 >/dev/null && echo "OK : http://localhost:3000" && exit 0
-            sleep 3
-          done
-          docker compose logs; exit 1
+          $healthy = $false
+          for ($i = 0; $i -lt 20; $i++) {
+            try {
+              $response = Invoke-WebRequest -Uri "http://localhost:3001" -UseBasicParsing -TimeoutSec 5
+              if ($response.StatusCode -eq 200) {
+                Write-Host "OK : http://localhost:3001"
+                $healthy = $true
+                break
+              }
+            } catch {
+              Start-Sleep -Seconds 3
+            }
+          }
+          if (-not $healthy) {
+            docker compose logs
+            throw "Health check failed: http://localhost:3001"
+          }
           

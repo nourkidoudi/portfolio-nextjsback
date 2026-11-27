@@ -36,7 +36,7 @@ L'application s'exécute dans un conteneur Docker orchestré avec Docker Compose
 ![04 - Docker Desktop](captures/04_docker_desktop_container.png)
 
 ### 5. Application Portfolio Next.js Déployée
-Le portfolio moderne est accessible localement sur `http://localhost:3000` :
+Le portfolio est accessible localement sur `http://localhost:3001` (port hôte distinct du dépôt `portfolio-test`) :
 ![05 - Application Déployée](captures/05_portfolio_application_deployed.png)
 
 ---
@@ -58,7 +58,7 @@ Ouvrir [http://localhost:3000](http://localhost:3000).
 docker compose up -d
 ```
 
-L'application est accessible sur [http://localhost:3000](http://localhost:3000).
+L'application est accessible sur [http://localhost:3001](http://localhost:3001). Le conteneur écoute sur le port 3000 en interne ; Compose publie son port sur 3001 pour éviter le conflit avec `portfolio-test`.
 
 ---
 
